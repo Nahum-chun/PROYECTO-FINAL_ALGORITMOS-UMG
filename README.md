@@ -1,2 +1,4 @@
 # PROYECTO-FINAL_ALGORITMOS-UMG
-sistema de gestión desarrollado en phyton curso Algoritmos 
+#Sistema de gestión desarrollado en Python.
+#Curso: Algoritmos
+#Integrantes : José Tul, Nahum Chun, Pedro Navarro.
