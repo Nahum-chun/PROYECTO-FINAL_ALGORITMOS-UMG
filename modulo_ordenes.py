@@ -42,3 +42,25 @@ def Ver_ordenes():
     else:
         for orden in ordenes:
             print(f"Abonado: {orden[0]} | Falla: {orden[1]} | Técnico: {orden[2]} | Estado: {orden[3]}")
+
+# Módulo de Estadísticas (Opción 7) Clientes
+def Mostrar_estadisticas():
+    print("\n========= ESTADÍSTICAS DEL SISTEMA =========")
+    
+    activos = 0
+    suspendidos = 0
+    
+
+# Recorremos la lista clientes para contar por estado
+    for cliente in clientes:
+        if cliente[5] == "Activo":
+            activos += 1
+        elif cliente[5] == "Suspendido":
+            suspendidos += 1
+            
+    print(f"Clientes registrados: {len(clientes)}")
+    print(f"Clientes activos: {activos}")
+    print(f"Clientes suspendidos: {suspendidos}")
+
+# Prueba de la función
+Mostrar_estadisticas()
