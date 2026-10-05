@@ -31,3 +31,14 @@ def Registrar_orden():
 Registrar_orden()
 
 print("Lista de ordenes actualizada:", ordenes)
+
+
+#Esto es para hacer las listas y poder verlas.
+def Ver_ordenes():
+    print("\n--- LISTADO DE ÓRDENES DE TRABAJO ---")
+    
+    if len(ordenes) == 0:
+        print("No hay órdenes registradas.")
+    else:
+        for orden in ordenes:
+            print(f"Abonado: {orden[0]} | Falla: {orden[1]} | Técnico: {orden[2]} | Estado: {orden[3]}")
