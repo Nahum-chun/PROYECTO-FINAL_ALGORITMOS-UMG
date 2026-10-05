@@ -14,18 +14,31 @@ ordenes = [
 def Registrar_orden():
     print("\n--- REGISTRAR ORDEN DE TRABAJO ---")
     
-    # 1. Aqui pedi los datos de la orden al usuario.
-    codigo = int(input("Ingrese código de abonado: "))
+    cliente_encontrado = False
+    
+    while not cliente_encontrado:
+        entrada = input("Ingrese código de abonado: ")
+        
+        if entrada.isdigit():
+            codigo = int(entrada)
+            
+            # Buscamos si el cliente existe en la lista 'clientes'
+            for cliente in clientes:
+                if cliente[0] == codigo:
+                    cliente_encontrado = True
+                    break
+            
+            if not cliente_encontrado:
+                print("❌ Error: El código de abonado no existe en la lista de clientes.")
+        else:
+            print("❌ Error: Debe ingresar un número entero.")
+
     falla = input("Ingrese tipo de falla: ")
     tecnico = input("Ingrese técnico asignado: ")
     
-    # 2. Aqui cree la nueva lista de la orden con los datos ingresados y el estado inicial
     nueva_orden = [codigo, falla, tecnico, "Pendiente"]
-    
-    # 3. Esto es para guardar en la lista de ordenes la nueva orden creada.
     ordenes.append(nueva_orden)
-    
-    print("Orden registrada con éxito")
+    print("¡Orden registrada con éxito!")
 
 # Llamamos a la función para que se ejecute
 Registrar_orden()
