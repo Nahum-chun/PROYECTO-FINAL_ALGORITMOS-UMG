@@ -43,7 +43,7 @@ def Ver_ordenes():
         for orden in ordenes:
             print(f"Abonado: {orden[0]} | Falla: {orden[1]} | Técnico: {orden[2]} | Estado: {orden[3]}")
 
-# Módulo de estadísticas (Opción 7)
+# Módulo de Estadísticas (Opción 7) terminado
 def Mostrar_estadisticas():
     print("\n========= ESTADÍSTICAS DEL SISTEMA =========")
     
@@ -51,10 +51,10 @@ def Mostrar_estadisticas():
     suspendidos = 0
     ingreso_total = 0
     
-    # Iniciamos con el primer cliente de la lista
     plan_mas_barato = clientes[0] if len(clientes) > 0 else None
     plan_mas_caro = clientes[0] if len(clientes) > 0 else None
     
+    # 1. Análisis de Clientes y Planes
     for cliente in clientes:
         if cliente[5] == "Activo":
             activos += 1
@@ -63,7 +63,6 @@ def Mostrar_estadisticas():
             
         ingreso_total += cliente[4]
         
-        # Comparamos precios para encontrar el mínimo y el máximo
         if cliente[4] < plan_mas_barato[4]:
             plan_mas_barato = cliente
         if cliente[4] > plan_mas_caro[4]:
@@ -71,6 +70,18 @@ def Mostrar_estadisticas():
             
     promedio_cliente = ingreso_total / len(clientes) if len(clientes) > 0 else 0
             
+    # 2. Análisis de Órdenes de Trabajo
+    ordenes_pendientes = 0
+    ordenes_finalizadas = 0
+    
+    for orden in ordenes:
+        # El estado de la orden está en la posición orden[3]
+        if orden[3] == "Pendiente":
+            ordenes_pendientes += 1
+        elif orden[3] == "Finalizada":
+            ordenes_finalizadas += 1
+
+    # RESULTADOS
     print(f"Clientes registrados: {len(clientes)}")
     print(f"Clientes activos: {activos}")
     print(f"Clientes suspendidos: {suspendidos}")
@@ -80,6 +91,9 @@ def Mostrar_estadisticas():
     if plan_mas_barato and plan_mas_caro:
         print(f"Plan más barato: {plan_mas_barato[3]} (Q{plan_mas_barato[4]:.2f})")
         print(f"Plan más caro: {plan_mas_caro[3]} (Q{plan_mas_caro[4]:.2f})")
+        
+    print(f"Órdenes pendientes: {ordenes_pendientes}")
+    print(f"Órdenes finalizadas: {ordenes_finalizadas}")
 
-# Para probar la función
+# Para probarla
 Mostrar_estadisticas()
