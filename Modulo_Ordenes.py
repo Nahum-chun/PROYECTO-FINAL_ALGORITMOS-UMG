@@ -38,7 +38,14 @@ def Registrar_orden():
     ordenes.append(nueva_orden)
     print("Orden registrada con exito.")
 
+def Ver_ordenes():
+    print("\n--- LISTADO DE ORDENES DE TRABAJO ---")
+    if len(ordenes) == 0:
+        print("No hay ordenes de trabajo registradas.")
+    else:
+        for orden in ordenes:
+            print(f"Abonado: {orden[0]} | Falla: {orden[1]} | Tecnico: {orden[2]} | Estado: {orden[3]}")
 
 # prueba temporal. lo borrare al final
 Registrar_orden()
-print("Lista de ordenes actual:", ordenes)
+Ver_ordenes()
