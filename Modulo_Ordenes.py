@@ -9,7 +9,7 @@ clientes = [
 
 ordenes = []
 
-
+#Creacion de la funcion registrar orden de trabajo y validacion de codigo abonado...dificiiiilismo
 def Registrar_orden():
     print("\n--- REGISTRAR ORDEN DE TRABAJO ---")
     
@@ -38,6 +38,7 @@ def Registrar_orden():
     ordenes.append(nueva_orden)
     print("Orden registrada con exito.")
 
+#Creacion de funcion ver ordenes de trabjajo y el formato limpio
 def Ver_ordenes():
     print("\n--- LISTADO DE ORDENES DE TRABAJO ---")
     if len(ordenes) == 0:
@@ -46,6 +47,15 @@ def Ver_ordenes():
         for orden in ordenes:
             print(f"Abonado: {orden[0]} | Falla: {orden[1]} | Tecnico: {orden[2]} | Estado: {orden[3]}")
 
+def Mostrar_estadisticas():
+    print("\n========= ESTADISTICAS DEL SISTEMA =========")
+    
+    # Validacion para verificar que existan clientes antes de calcular
+    if len(clientes) == 0:
+        print("No hay clientes registrados en el sistema para calcular estadisticas.")
+        return
+
 # prueba temporal. lo borrare al final
 Registrar_orden()
 Ver_ordenes()
+Mostrar_estadisticas()
