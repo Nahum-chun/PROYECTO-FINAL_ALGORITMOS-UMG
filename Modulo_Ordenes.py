@@ -50,10 +50,23 @@ def Ver_ordenes():
 def Mostrar_estadisticas():
     print("\n========= ESTADISTICAS DEL SISTEMA =========")
     
-    # Validacion para verificar que existan clientes antes de calcular
     if len(clientes) == 0:
         print("No hay clientes registrados en el sistema para calcular estadisticas.")
         return
+
+    activos = 0
+    suspendidos = 0
+    
+    # Recorrido de clientes para clasificar por estado
+    for cliente in clientes:
+        if cliente[5] == "Activo":
+            activos += 1
+        elif cliente[5] == "Suspendido":
+            suspendidos += 1
+
+    print(f"Clientes registrados: {len(clientes)}")
+    print(f"Clientes activos: {activos}")
+    print(f"Clientes suspendidos: {suspendidos}")
 
 # prueba temporal. lo borrare al final
 Registrar_orden()
