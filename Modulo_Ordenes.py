@@ -56,17 +56,24 @@ def Mostrar_estadisticas():
 
     activos = 0
     suspendidos = 0
+    ingreso_total = 0
     
-    # Recorrido de clientes para clasificar por estado
+    # recorrido para contar estados y acumular ingresos
     for cliente in clientes:
         if cliente[5] == "Activo":
             activos += 1
         elif cliente[5] == "Suspendido":
             suspendidos += 1
+            
+        ingreso_total += cliente[4]  # en la posicion 4 esta el precio del plan
+        
+    promedio_cliente = ingreso_total / len(clientes)
 
     print(f"Clientes registrados: {len(clientes)}")
     print(f"Clientes activos: {activos}")
     print(f"Clientes suspendidos: {suspendidos}")
+    print(f"Ingreso mensual: Q{ingreso_total:.2f}")
+    print(f"Promedio por cliente: Q{promedio_cliente:.2f}")
 
 # prueba temporal. lo borrare al final
 Registrar_orden()
