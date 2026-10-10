@@ -62,7 +62,6 @@ def Mostrar_estadisticas():
     plan_mas_barato = clientes[0]
     plan_mas_caro = clientes[0]
     
-    # recorrido usando la estructura de diccionarios de mi compañero nahum.....
     for cliente in clientes:
         if cliente["estado"] == "activo":
             activos += 1
@@ -78,6 +77,16 @@ def Mostrar_estadisticas():
             
     promedio_cliente = ingreso_total / len(clientes)
 
+    # Conteo de ordenes por estado
+    ordenes_pendientes = 0
+    ordenes_finalizadas = 0
+    
+    for orden in ordenes:
+        if orden[3] == "Pendiente":
+            ordenes_pendientes += 1
+        elif orden[3] == "Finalizada":
+            ordenes_finalizadas += 1
+
     print(f"Clientes registrados: {len(clientes)}")
     print(f"Clientes activos: {activos}")
     print(f"Clientes inactivos: {inactivos}")
@@ -85,6 +94,8 @@ def Mostrar_estadisticas():
     print(f"Promedio por cliente: Q{promedio_cliente:.2f}")
     print(f"Plan mas barato: {plan_mas_barato['plan']} (Q{plan_mas_barato['precio']:.2f})")
     print(f"Plan mas caro: {plan_mas_caro['plan']} (Q{plan_mas_caro['precio']:.2f})")
+    print(f"Ordenes pendientes: {ordenes_pendientes}")
+    print(f"Ordenes finalizadas: {ordenes_finalizadas}")
 
 # prueba temporal. lo borrare al final
 Registrar_orden()
