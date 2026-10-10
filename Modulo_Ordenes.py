@@ -16,13 +16,13 @@ def Registrar_orden():
     cliente_encontrado = False
     
     while not cliente_encontrado:
-        entrada = input("Ingrese codigo de abonado: ")
+        entrada = input("Ingrese codigo de abonado: ").strip()
         
         if entrada.isdigit():
-            codigo = int(entrada)
+            codigo = entrada  # se mantiene como texto para coincidir con la lista de clientes
             
             for cliente in clientes:
-                if cliente[0] == codigo:
+                if cliente["codigo"] == codigo:
                     cliente_encontrado = True
                     break
             
@@ -38,7 +38,7 @@ def Registrar_orden():
     ordenes.append(nueva_orden)
     print("Orden registrada con exito.")
 
-#Creacion de funcion ver ordenes de trabjajo y el formato limpio
+
 def Ver_ordenes():
     print("\n--- LISTADO DE ORDENES DE TRABAJO ---")
     if len(ordenes) == 0:
@@ -46,6 +46,7 @@ def Ver_ordenes():
     else:
         for orden in ordenes:
             print(f"Abonado: {orden[0]} | Falla: {orden[1]} | Tecnico: {orden[2]} | Estado: {orden[3]}")
+
 
 def Mostrar_estadisticas():
     print("\n========= ESTADISTICAS DEL SISTEMA =========")
@@ -55,25 +56,35 @@ def Mostrar_estadisticas():
         return
 
     activos = 0
-    suspendidos = 0
-    ingreso_total = 0
+    inactivos = 0
+    ingreso_total = 0.0
     
-    # recorrido para contar estados y acumular ingresos
+    plan_mas_barato = clientes[0]
+    plan_mas_caro = clientes[0]
+    
+    # recorrido usando la estructura de diccionarios de mi compañero nahum.....
     for cliente in clientes:
-        if cliente[5] == "Activo":
+        if cliente["estado"] == "activo":
             activos += 1
-        elif cliente[5] == "Suspendido":
-            suspendidos += 1
+        elif cliente["estado"] == "inactivo":
+            inactivos += 1
             
-        ingreso_total += cliente[4]  # en la posicion 4 esta el precio del plan
+        ingreso_total += cliente["precio"]
         
+        if cliente["precio"] < plan_mas_barato["precio"]:
+            plan_mas_barato = cliente
+        if cliente["precio"] > plan_mas_caro["precio"]:
+            plan_mas_caro = cliente
+            
     promedio_cliente = ingreso_total / len(clientes)
 
     print(f"Clientes registrados: {len(clientes)}")
     print(f"Clientes activos: {activos}")
-    print(f"Clientes suspendidos: {suspendidos}")
+    print(f"Clientes inactivos: {inactivos}")
     print(f"Ingreso mensual: Q{ingreso_total:.2f}")
     print(f"Promedio por cliente: Q{promedio_cliente:.2f}")
+    print(f"Plan mas barato: {plan_mas_barato['plan']} (Q{plan_mas_barato['precio']:.2f})")
+    print(f"Plan mas caro: {plan_mas_caro['plan']} (Q{plan_mas_caro['precio']:.2f})")
 
 # prueba temporal. lo borrare al final
 Registrar_orden()
