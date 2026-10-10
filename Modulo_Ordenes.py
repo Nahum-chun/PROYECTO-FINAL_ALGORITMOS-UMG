@@ -1,10 +1,10 @@
 # Módulo de ordenes y estadísticas
 
-# Datos de prueba temporales para la lista de clientes y ordenes. lo debo borrar al final.
+# datos de prueba para adaptar a los datos del compañero nahum, con esto emepezare a adaptar el codigo en base a el, luego lo borro.
 clientes = [
-    [1001, "Juan Perez", "12345678", "10 Mbps", 200.0, "Activo"],
-    [1002, "Ana Gomez", "87654321", "50 Mbps", 450.0, "Activo"],
-    [1003, "Carlos Lopez", "11223344", "20 Mbps", 300.0, "Suspendido"]
+    {"codigo": "1001", "nombre": "Juan Perez", "direccion": "Zona 1", "plan": "10 Mbps", "precio": 200.0, "estado": "activo"},
+    {"codigo": "1002", "nombre": "Ana Gomez", "direccion": "Zona 10", "plan": "50 Mbps", "precio": 450.0, "estado": "activo"},
+    {"codigo": "1003", "nombre": "Carlos Lopez", "direccion": "Zona 5", "plan": "20 Mbps", "precio": 300.0, "estado": "inactivo"}
 ]
 
 ordenes = []
