@@ -11,6 +11,7 @@ ordenes = []
 
 #Creacion de la funcion registrar orden de trabajo y validacion de codigo abonado...dificiiiilismo
 def Registrar_orden():
+    """Solicita y valida los datos para crear una nueva orden de trabajo."""
     print("\n--- REGISTRAR ORDEN DE TRABAJO ---")
     
     cliente_encontrado = False
@@ -19,7 +20,7 @@ def Registrar_orden():
         entrada = input("Ingrese codigo de abonado: ").strip()
         
         if entrada.isdigit():
-            codigo = entrada  # se mantiene como texto para coincidir con la lista de clientes
+            codigo = entrada
             
             for cliente in clientes:
                 if cliente["codigo"] == codigo:
@@ -40,6 +41,7 @@ def Registrar_orden():
 
 
 def Ver_ordenes():
+    """Despliega la lista de todas las ordenes de trabajo registradas."""
     print("\n--- LISTADO DE ORDENES DE TRABAJO ---")
     if len(ordenes) == 0:
         print("No hay ordenes de trabajo registradas.")
@@ -49,6 +51,7 @@ def Ver_ordenes():
 
 
 def Mostrar_estadisticas():
+    """Calcula y muestra resumenes financieros, de clientes y de ordenes del sistema."""
     print("\n========= ESTADISTICAS DEL SISTEMA =========")
     
     if len(clientes) == 0:
@@ -77,7 +80,6 @@ def Mostrar_estadisticas():
             
     promedio_cliente = ingreso_total / len(clientes)
 
-    # Conteo de ordenes por estado
     ordenes_pendientes = 0
     ordenes_finalizadas = 0
     
@@ -96,7 +98,6 @@ def Mostrar_estadisticas():
     print(f"Plan mas caro: {plan_mas_caro['plan']} (Q{plan_mas_caro['precio']:.2f})")
     print(f"Ordenes pendientes: {ordenes_pendientes}")
     print(f"Ordenes finalizadas: {ordenes_finalizadas}")
-
 # prueba temporal. lo borrare al final
 Registrar_orden()
 Ver_ordenes()
