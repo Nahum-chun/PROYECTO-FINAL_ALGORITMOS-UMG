@@ -1,115 +1,83 @@
-from clientes import agregar_cliente
+
+from clientes import agregar_cliente, listar_clientes, buscar_cliente, eliminar_cliente
+
+# Lista compartida de clientes
 clientes = []
 
+# Inicio de sesión
 intentos = 3
 acceso = False
+
 while intentos > 0:
 
-    user = input("Ingrese su nombre de usuario: ")
+    usuario = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
 
-    if user == "pepe" and contraseña == "5555":
-        print("Acceso Correcto")
+    if usuario == "pepe" and contraseña == "5555":
+        print("\nAcceso correcto. Bienvenido a NetControl ISP.")
         acceso = True
         break
 
     else:
         intentos -= 1
-        print(f"Acceso Incorrecto. Le quedan {intentos} intentos.")
+        print(f"Acceso incorrecto. Le quedan {intentos} intentos.")
 
 if intentos == 0:
     print("Se ha bloqueado el acceso. Intente más tarde.")
-    
+
+
+# Menú principal
 if acceso == True:
+
     opcion = ""
 
     while opcion != "9":
-        print("\n ===== NETCONTROL ISP  =====")
-        print("1.  Agregar Cliente")
-        print("2. lsitar clientes")
-        print("3. buscar cliente")
-        print("4. eliminar cliente")
-        print("5. Registrar Orden de Trabajo")
-        print("6. ver ordenes de trabajo")
-        print("7. Estadistiacas")
-        print("8. ordenar clientes ")
-        print("9. Salir")
 
-        opcion = input("seleccione una opción: ")
+        print("\n========== NETCONTROL ISP ==========")
+        print("1. Agregar cliente")
+        print("2. Listar clientes")
+        print("3. Buscar cliente")
+        print("4. Eliminar cliente")
+        print("5. Registrar orden de trabajo")
+        print("6. Ver órdenes de trabajo")
+        print("7. Estadísticas")
+        print("8. Ordenar clientes")
+        print("9. Salir")
+        print("====================================")
+
+        opcion = input("Seleccione una opción: ").strip()
 
         if opcion == "1":
             agregar_cliente(clientes)
 
-
-
         elif opcion == "2":
-            print("Listar Clientes")   
-
-            if len(clientes) == 0:
-                print("No hay clientes registrados.")
-            else:
-                for cliente in clientes:
-                    print(f"Código: {cliente['codigo']}, Nombre: {cliente['nombre']}, Dirección: {cliente['direccion']}, Plan: {cliente['plan']}, Precio: {cliente['precio']}, Estado: {cliente['estado']}")
+            listar_clientes(clientes)
 
         elif opcion == "3":
-            print("Buscar Cliente")
-            codigo_buscar = input("Ingrese el código del cliente a buscar: ")
-            encontrado = False
-            for cliente in clientes:
-                if cliente["codigo"] == codigo_buscar:
-                    encontrado = True
-                    print("Cliente encontrado:")
-                    print(f"Nombre: {cliente['nombre']}")
-                    print(f"Dirección: {cliente['direccion']}")
-                    print(f"Plan: {cliente['plan']}")
-                    print(f"Precio: Q{cliente['precio']}")
-                    print(f"Estado: {cliente['estado']}")
-                    break
-
-            if encontrado == False:
-                print("No existe ningún cliente con ese código.")
-
+            buscar_cliente(clientes)
 
         elif opcion == "4":
-            print("Eliminar Cliente")
-            codigo_eliminar = input("Ingrese el código del cliente a eliminar: ")
-            encontrado = False
-
-            for cliente in clientes:
-                if cliente["codigo"] == codigo_eliminar:
-                    encontrado = True
-                    print(f"Cliente encontrado: {cliente['nombre']}")
-                    break
-
-            if encontrado == True:
-                confirmar = input("¿Desea eliminar este cliente? (si/no): ").lower()
-
-                if confirmar == "si":
-                    clientes.remove(cliente)
-                    print("Cliente eliminado correctamente.")
-                else:
-                    print("Eliminación cancelada.")
-            else:
-                print("No existe ningún cliente con ese código.")
-
+            eliminar_cliente(clientes)
 
         elif opcion == "5":
-            print("Registrar Orden de Trabajo")
+            print("\nRegistrar orden de trabajo")
+            print("Módulo pendiente de integración.")
 
         elif opcion == "6":
-            print("Ver Ordenes de Trabajo")
+            print("\nVer órdenes de trabajo")
+            print("Módulo pendiente de integración.")
 
         elif opcion == "7":
-            print("Estadisticas")
+            print("\nEstadísticas")
+            print("Módulo pendiente de integración.")
 
         elif opcion == "8":
-            print("Ordenar Clientes")
+            print("\nOrdenar clientes")
+            print("Módulo pendiente de integración.")
 
         elif opcion == "9":
-            print("Saliendo de NetControl ISP...")
+            print("\nSaliendo de NetControl ISP...")
+            print("Gracias por utilizar nuestro sistema.")
+
         else:
-            print("Opción inválida. Intente nuevamente .")  
-
-
-
-
+            print("\nOpción inválida. Intente nuevamente.")

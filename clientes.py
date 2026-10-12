@@ -1,5 +1,6 @@
+
 def agregar_cliente(clientes):
-    print("Agregar cliente")
+    print("\n--- AGREGAR CLIENTE ---")
 
     codigo = input("Código del cliente: ").strip()
 
@@ -68,3 +69,68 @@ def agregar_cliente(clientes):
     clientes.append(cliente)
 
     print("Cliente agregado correctamente.")
+
+
+def listar_clientes(clientes):
+    print("\n--- LISTAR CLIENTES ---")
+
+    if len(clientes) == 0:
+        print("No hay clientes registrados.")
+    else:
+        for cliente in clientes:
+            print(f"Código: {cliente['codigo']}")
+            print(f"Nombre: {cliente['nombre']}")
+            print(f"Dirección: {cliente['direccion']}")
+            print(f"Plan: {cliente['plan']}")
+            print(f"Precio: Q{cliente['precio']:.2f}")
+            print(f"Estado: {cliente['estado']}")
+            print("----------------------------")
+
+
+def buscar_cliente(clientes):
+    print("\n--- BUSCAR CLIENTE ---")
+
+    codigo_buscar = input("Ingrese el código del cliente a buscar: ").strip()
+
+    encontrado = False
+
+    for cliente in clientes:
+        if cliente["codigo"] == codigo_buscar:
+            encontrado = True
+
+            print("\nCliente encontrado:")
+            print(f"Código: {cliente['codigo']}")
+            print(f"Nombre: {cliente['nombre']}")
+            print(f"Dirección: {cliente['direccion']}")
+            print(f"Plan: {cliente['plan']}")
+            print(f"Precio: Q{cliente['precio']:.2f}")
+            print(f"Estado: {cliente['estado']}")
+            break
+
+    if encontrado == False:
+        print("No existe ningún cliente con ese código.")
+
+
+def eliminar_cliente(clientes):
+    print("\n--- ELIMINAR CLIENTE ---")
+
+    codigo_eliminar = input("Ingrese el código del cliente a eliminar: ").strip()
+
+    encontrado = False
+
+    for cliente in clientes:
+        if cliente["codigo"] == codigo_eliminar:
+            encontrado = True
+            print(f"Cliente encontrado: {cliente['nombre']}")
+            break
+
+    if encontrado == True:
+        confirmar = input("¿Desea eliminar este cliente? (si/no): ").strip().lower()
+
+        if confirmar == "si":
+            clientes.remove(cliente)
+            print("Cliente eliminado correctamente.")
+        else:
+            print("Eliminación cancelada.")
+    else:
+        print("No existe ningún cliente con ese código.")
