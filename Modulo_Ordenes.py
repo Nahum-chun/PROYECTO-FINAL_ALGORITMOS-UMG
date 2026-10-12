@@ -1,12 +1,4 @@
 # Módulo de ordenes y estadísticas
-
-# datos de prueba para adaptar a los datos del compañero nahum, con esto emepezare a adaptar el codigo en base a el, luego lo borro.
-clientes = [
-    {"codigo": "1001", "nombre": "Juan Perez", "direccion": "Zona 1", "plan": "10 Mbps", "precio": 200.0, "estado": "activo"},
-    {"codigo": "1002", "nombre": "Ana Gomez", "direccion": "Zona 10", "plan": "50 Mbps", "precio": 450.0, "estado": "activo"},
-    {"codigo": "1003", "nombre": "Carlos Lopez", "direccion": "Zona 5", "plan": "20 Mbps", "precio": 300.0, "estado": "inactivo"}
-]
-
 ordenes = []
 
 #Creacion de la funcion registrar orden de trabajo y validacion de codigo abonado...dificiiiilismo
@@ -98,7 +90,3 @@ def Mostrar_estadisticas():
     print(f"Plan mas caro: {plan_mas_caro['plan']} (Q{plan_mas_caro['precio']:.2f})")
     print(f"Ordenes pendientes: {ordenes_pendientes}")
     print(f"Ordenes finalizadas: {ordenes_finalizadas}")
-# prueba temporal. lo borrare al final
-Registrar_orden()
-Ver_ordenes()
-Mostrar_estadisticas()
