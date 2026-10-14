@@ -95,3 +95,13 @@ if __name__ == "__main__":
 
     print("\n--- ESTADO FINAL DE CLIENTES (ORDENADO POR PRECIO) ---")
     mostrar_clientes(clientes)
+
+
+
+    #Modulo de Interfaz Grafica 
+    #Inregrante 3 Pedro Andres
+
+    
+
+
+    
