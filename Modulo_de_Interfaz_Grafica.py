@@ -22,5 +22,18 @@ def crear_interfaz():
     header = tk.Frame(ventana, bg="#1e293b")
     header.pack(fill=tk.X)
 
-lbl_titulo = tk.Label(header, text="NETCONTROL ISP", font=("Helvetica", 16, "bold"), fg="white", bg="#1e293b")
+    lbl_titulo = tk.Label(header, text="NETCONTROL ISP", font=("Helvetica", 16, "bold"), fg="white", bg="#1e293b")
+    lbl_titulo.pack(side="left", padx=15, pady=10)
+
+    #Contenedor Principal
+    main_frame = tk.Frame(ventana, bg="#f0f2f5")
+    main_frame.pack(fill="both", expand=True, padx=20, pady=15)
+
+    #Tarjetas de Resumen 
+    cards_frame = tk.Frame(main_frame, bg="#f0f2f5")
+    cards_frame.pack(fill="x", pady=10 )
+
+    
+
+
 
