@@ -60,3 +60,28 @@ def crear_interfaz():
     tabla.column("plan", width=100, anchor="center")
     tabla.column("precio", width=100, anchor="center")
     tabla.column("estado", width=100, anchor="center")
+
+    for c in clientes_Prueba:
+        tabla.insert("", "end", values=(c["codigo"], c["nombre"], c["plan"], c["precio"], c["estado"]))
+
+    tabla.pack(fill="both", expand=True, padx=5, pady=5)
+
+    # Botón de Acción
+    btn_frame = tk.Frame(main_frame, bg="#f0f2f5")
+    btn_frame.pack(fill="x", pady=5)
+
+    btn_ordenar = tk.Button(
+        btn_frame, 
+        text="🔄 Ordenar por Precio (Burbuja)", 
+        bg="#2563eb", 
+        fg="white", 
+        font=("Helvetica", 10, "bold"), 
+        command=lambda: messagebox.showinfo("Algoritmo", "Función ejecutada: Clientes ordenados por precio.")
+    )
+    btn_ordenar.pack(side="right", padx=5)
+
+    ventana.mainloop()
+
+if __name__ == "__main__":
+    crear_interfaz()
+
