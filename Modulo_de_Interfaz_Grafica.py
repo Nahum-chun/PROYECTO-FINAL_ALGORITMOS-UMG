@@ -33,7 +33,30 @@ def crear_interfaz():
     cards_frame = tk.Frame(main_frame, bg="#f0f2f5")
     cards_frame.pack(fill="x", pady=10 )
 
-    
+    lbl_c1 = tk.Label(cards_frame, text="👤 Clientes: 4", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
+    lbl_c1.pack(side="left", expand=True, fill="x", padx=5)
 
+    lbl_c2 = tk.Label(cards_frame, text="📋 Órdenes: 7", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
+    lbl_c2.pack(side="left", expand=True, fill="x", padx=5)
 
+    lbl_c3 = tk.Label(cards_frame, text="💰 Ingresos: Q1,550", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
+    lbl_c3.pack(side="left", expand=True, fill="x", padx=5)
 
+    #Tabla de Clientes 
+    tabla_frame = tk.Frame(main_frame, bg="#ffffff", relief="solid", bd=1)
+    tabla_frame.pack(fill="both", expand=True, pady=10)
+
+    columnas = ("codigo", "nombre", "plan", "precio", "estado")
+    tabla = ttk.treeview(tabla_frame, columns=columnas, show="headings", height=6)
+
+    tabla.heading("codigo", text="Código")
+    tabla.heading("nombre", text="Nombre")
+    tabla.heading("plan", text="Plan")
+    tabla.heading("precio", text="Precio")
+    tabla.heading("estado", text="Estado")
+
+    tabla.column("codigo", width=80, anchor="center")
+    tabla.column("nombre", width=150, anchor="w")
+    tabla.column("plan", width=100, anchor="center")
+    tabla.column("precio", width=100, anchor="center")
+    tabla.column("estado", width=100, anchor="center")
