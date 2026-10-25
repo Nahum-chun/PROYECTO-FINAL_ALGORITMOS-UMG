@@ -2,7 +2,7 @@
 ordenes = []
 
 #Creacion de la funcion registrar orden de trabajo y validacion de codigo abonado...dificiiiilismo
-def Registrar_orden():
+def Registrar_orden(clientes):
     """Solicita y valida los datos para crear una nueva orden de trabajo."""
     print("\n--- REGISTRAR ORDEN DE TRABAJO ---")
     
@@ -11,7 +11,7 @@ def Registrar_orden():
     while not cliente_encontrado:
         entrada = input("Ingrese codigo de abonado: ").strip()
         
-        if entrada.isdigit():
+        if entrada:
             codigo = entrada
             
             for cliente in clientes:
@@ -22,7 +22,7 @@ def Registrar_orden():
             if not cliente_encontrado:
                 print("Error: El codigo de abonado no existe en la lista de clientes.")
         else:
-            print("Error: Debe ingresar un numero entero valido.")
+            print("Error: Debe ingresar un codigo de abonado valido.")
 
     falla = input("Ingrese tipo de falla: ")
     tecnico = input("Ingrese tecnico asignado: ")
@@ -42,7 +42,7 @@ def Ver_ordenes():
             print(f"Abonado: {orden[0]} | Falla: {orden[1]} | Tecnico: {orden[2]} | Estado: {orden[3]}")
 
 
-def Mostrar_estadisticas():
+def Mostrar_estadisticas(clientes):
     """Calcula y muestra resumenes financieros, de clientes y de ordenes del sistema."""
     print("\n========= ESTADISTICAS DEL SISTEMA =========")
     
