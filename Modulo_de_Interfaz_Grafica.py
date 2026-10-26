@@ -3,6 +3,17 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 
+try:
+    from main_Módulo_de_Ordenamiento import ordenar_clientes_burbuja
+except ImportError:
+    # Función de respaldo si el archivo se ejecuta de forma independiente
+    def ordenar_clientes_burbuja(lista):
+        n = len(lista)
+        for i in range(n - 1):
+            for j in range(0, n - i - 1):
+                if lista[j]["precio"] > lista[j + 1]["precio"]:
+                    lista[j], lista[j + 1] = lista[j + 1], lista[j]
+
 #Datos de prueba para la vista previa de la interfaz grafica
 
 clientes_Prueba = [
@@ -12,7 +23,12 @@ clientes_Prueba = [
     {"codigo": 1004, "nombre": "Luis", "direccion": "Malacatán", "plan": "50 Mbps", "precio": 600, "estado": "Activo"}
 ]
 
-def crear_interfaz():
+def crear_interfaz(clientes=None, ordenes=None):
+    if clientes is None:
+        clientes = clientes_Prueba
+    if ordenes is None:
+        ordenes = []
+
     ventana = tk.Tk()
     ventana.title("NetControl ISP - PANEL DE CONTROL")
     ventana.geometry("650x450")
@@ -29,25 +45,30 @@ def crear_interfaz():
     main_frame = tk.Frame(ventana, bg="#f0f2f5")
     main_frame.pack(fill="both", expand=True, padx=20, pady=15)
 
+    #Calculo dinamico de totales e ingresos 
+    total_clientes = len(clientes)
+    total_ordenes = len(ordenes)
+    total_ingresos = sum(c["precio"] for c in clientes) if clientes else 0
+
     #Tarjetas de Resumen 
     cards_frame = tk.Frame(main_frame, bg="#f0f2f5")
     cards_frame.pack(fill="x", pady=10 )
 
-    lbl_c1 = tk.Label(cards_frame, text="👤 Clientes: 4", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
-    lbl_c1.pack(side="left", expand=True, fill="x", padx=5)
+    lbl_c1 = tk.Label(cards_frame, text=f"👤 Clientes: {total_clientes}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1)
+    lbl_c1.pack(side="left", expand=True, fill="x", padx=5, ipadx=10, ipady=8 )
 
-    lbl_c2 = tk.Label(cards_frame, text="📋 Órdenes: 7", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
-    lbl_c2.pack(side="left", expand=True, fill="x", padx=5)
+    lbl_c2 = tk.Label(cards_frame, text=f"📋 Órdenes: {total_ordenes}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1)
+    lbl_c2.pack(side="left", expand=True, fill="x", padx=5, ipadx=10, ipady=8)
 
-    lbl_c3 = tk.Label(cards_frame, text="💰 Ingresos: Q1,550", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
-    lbl_c3.pack(side="left", expand=True, fill="x", padx=5)
+    lbl_c3 = tk.Label(cards_frame, text=f"💰 Ingresos: Q{total_ingresos:,}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1)
+    lbl_c3.pack(side="left", expand=True, fill="x", padx=5, ipadx=10, ipady=8)
 
     #Tabla de Clientes 
     tabla_frame = tk.Frame(main_frame, bg="#ffffff", relief="solid", bd=1)
     tabla_frame.pack(fill="both", expand=True, pady=10)
 
     columnas = ("codigo", "nombre", "plan", "precio", "estado")
-    tabla = ttk.treeview(tabla_frame, columns=columnas, show="headings", height=6)
+    tabla = ttk.Treeview(tabla_frame, columns=columnas, show="headings", height=6)
 
     tabla.heading("codigo", text="Código")
     tabla.heading("nombre", text="Nombre")
@@ -61,12 +82,25 @@ def crear_interfaz():
     tabla.column("precio", width=100, anchor="center")
     tabla.column("estado", width=100, anchor="center")
 
-    for c in clientes_Prueba:
-        tabla.insert("", "end", values=(c["codigo"], c["nombre"], c["plan"], c["precio"], c["estado"]))
+    def cargar_datos_tabla(lista_datos):
+        for fila in tabla.get_children():
+            tabla.delete(fila)
+        for c in lista_datos:
+            precio_fmt = f"Q{c['precio']:.2f}" if isinstance(c['precio'], (int, float)) else str(c['precio'])
+            tabla.insert("", "end", values=(c["codigo"], c["nombre"], c["plan"], precio_fmt, c["estado"]))
+
+    # cargar inicial con los datos recibidos 
+    cargar_datos_tabla(clientes)
 
     tabla.pack(fill="both", expand=True, padx=5, pady=5)
 
     # Botón de Acción
+    def ejecutar_ordenamiento():
+        clientes_ordenados = clientes.copy()
+        ordenar_clientes_burbuja(clientes_ordenados)
+        cargar_datos_tabla(clientes_ordenados)
+        messagebox.showinfo("Algoritmo", "Clientes ordenados por precio exitosamente (Menor a Mayor).")
+
     btn_frame = tk.Frame(main_frame, bg="#f0f2f5")
     btn_frame.pack(fill="x", pady=5)
 
@@ -76,12 +110,12 @@ def crear_interfaz():
         bg="#2563eb", 
         fg="white", 
         font=("Helvetica", 10, "bold"), 
-        command=lambda: messagebox.showinfo("Algoritmo", "Función ejecutada: Clientes ordenados por precio.")
+        command=ejecutar_ordenamiento
     )
     btn_ordenar.pack(side="right", padx=5)
 
     ventana.mainloop()
 
 if __name__ == "__main__":
-    crear_interfaz()
+    crear_interfaz(clientes_Prueba, [])
 
