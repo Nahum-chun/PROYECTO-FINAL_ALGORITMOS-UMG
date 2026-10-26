@@ -54,14 +54,14 @@ def crear_interfaz(clientes=None, ordenes=None):
     cards_frame = tk.Frame(main_frame, bg="#f0f2f5")
     cards_frame.pack(fill="x", pady=10 )
 
-    lbl_c1 = tk.Label(cards_frame, text=f"👤 Clientes: {total_clientes}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
-    lbl_c1.pack(side="left", expand=True, fill="x", padx=5)
+    lbl_c1 = tk.Label(cards_frame, text=f"👤 Clientes: {total_clientes}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1)
+    lbl_c1.pack(side="left", expand=True, fill="x", padx=5, ipadx=10, ipady=8 )
 
-    lbl_c2 = tk.Label(cards_frame, text=f"📋 Órdenes: {total_ordenes}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
-    lbl_c2.pack(side="left", expand=True, fill="x", padx=5)
+    lbl_c2 = tk.Label(cards_frame, text=f"📋 Órdenes: {total_ordenes}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1)
+    lbl_c2.pack(side="left", expand=True, fill="x", padx=5, ipadx=10, ipady=8)
 
-    lbl_c3 = tk.Label(cards_frame, text=f"💰 Ingresos: Q{total_ingresos:,}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1, ipadx=10, ipady=8)
-    lbl_c3.pack(side="left", expand=True, fill="x", padx=5)
+    lbl_c3 = tk.Label(cards_frame, text=f"💰 Ingresos: Q{total_ingresos:,}", font=("Helvetica", 10, "bold"), bg="#ffffff", relief="solid", bd=1)
+    lbl_c3.pack(side="left", expand=True, fill="x", padx=5, ipadx=10, ipady=8)
 
     #Tabla de Clientes 
     tabla_frame = tk.Frame(main_frame, bg="#ffffff", relief="solid", bd=1)
@@ -87,7 +87,7 @@ def crear_interfaz(clientes=None, ordenes=None):
             tabla.delete(fila)
         for c in lista_datos:
             precio_fmt = f"Q{c['precio']:.2f}" if isinstance(c['precio'], (int, float)) else str(c['precio'])
-        tabla.insert("", "end", values=(c["codigo"], c["nombre"], c["plan"], precio_fmt, c["estado"]))
+            tabla.insert("", "end", values=(c["codigo"], c["nombre"], c["plan"], precio_fmt, c["estado"]))
 
     # cargar inicial con los datos recibidos 
     cargar_datos_tabla(clientes)
