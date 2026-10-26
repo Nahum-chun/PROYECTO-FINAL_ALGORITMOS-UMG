@@ -1,5 +1,6 @@
 
 from clientes import agregar_cliente, listar_clientes, buscar_cliente, eliminar_cliente
+from Modulo_Ordenes import Registrar_orden, Ver_ordenes, Mostrar_estadisticas
 
 # Lista compartida de clientes
 clientes = []
@@ -60,16 +61,13 @@ if acceso == True:
             eliminar_cliente(clientes)
 
         elif opcion == "5":
-            print("\nRegistrar orden de trabajo")
-            print("Módulo pendiente de integración.")
+            Registrar_orden(clientes)
 
         elif opcion == "6":
-            print("\nVer órdenes de trabajo")
-            print("Módulo pendiente de integración.")
+            Ver_ordenes()
 
         elif opcion == "7":
-            print("\nEstadísticas")
-            print("Módulo pendiente de integración.")
+            Mostrar_estadisticas(clientes)
 
         elif opcion == "8":
             print("\nOrdenar clientes")
