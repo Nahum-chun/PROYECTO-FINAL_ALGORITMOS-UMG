@@ -1,6 +1,7 @@
 
 from clientes import agregar_cliente, listar_clientes, buscar_cliente, eliminar_cliente
-from Modulo_Ordenes import Registrar_orden, Ver_ordenes, Mostrar_estadisticas
+from Modulo_Ordenes import Registrar_orden, Ver_ordenes, Mostrar_estadisticas, ordenes
+from Modulo_de_Interfaz_Grafica  import crear_interfaz
 
 # Lista compartida de clientes
 clientes = []
@@ -70,8 +71,7 @@ if acceso == True:
             Mostrar_estadisticas(clientes)
 
         elif opcion == "8":
-            print("\nOrdenar clientes")
-            print("Módulo pendiente de integración.")
+            crear_interfaz(clientes, ordenes)
 
         elif opcion == "9":
             print("\nSaliendo de NetControl ISP...")
