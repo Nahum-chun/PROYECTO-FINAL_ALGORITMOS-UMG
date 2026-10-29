@@ -82,6 +82,39 @@ class ClientesGUI:
             "codigo", "nombre", "direccion",
             "plan", "precio", "estado"
         )
+ # Buscador grafico de clientes
+        buscador = tk.Frame(ventana, bg="#F1F5F9")
+        buscador.pack(fill="x", padx=25, pady=5)
+
+        tk.Label(
+            buscador,
+            text="Buscar por codigo:",
+            bg="#F1F5F9",
+            font=("Arial", 10, "bold")
+        ).pack(side="left", padx=5)
+
+        self.entrada_buscar = tk.Entry(
+            buscador,
+            font=("Arial", 11),
+            width=20
+        )
+        self.entrada_buscar.pack(side="left", padx=5)
+
+        tk.Button(
+            buscador,
+            text="BUSCAR",
+            command=self.buscar_cliente,
+            bg="#2563EB",
+            fg="white"
+        ).pack(side="left", padx=5)
+
+        tk.Button(
+            buscador,
+            text="MOSTRAR TODOS",
+            command=self.actualizar_tabla,
+            bg="#64748B",
+            fg="white"
+        ).pack(side="left", padx=5)
 
         contenedor = tk.Frame(ventana)
         contenedor.pack(fill="both", expand=True, padx=25, pady=10)
@@ -117,6 +150,8 @@ class ClientesGUI:
 
         self.tabla.pack(side="left", fill="both", expand=True)
         barra.pack(side="right", fill="y")
+
+       
 
         self.actualizar_tabla()
 
@@ -200,6 +235,45 @@ class ClientesGUI:
                 )
             )
 
+
+    def buscar_cliente(self):
+        codigo = self.entrada_buscar.get().strip()
+
+        if not codigo:
+            messagebox.showwarning(
+                "Busqueda",
+                "Ingrese un codigo para buscar."
+            )
+            return
+
+        for cliente in self.clientes:
+            if cliente["codigo"] == codigo:
+                for fila in self.tabla.get_children():
+                    self.tabla.delete(fila)
+
+                self.tabla.insert(
+                    "",
+                    "end",
+                    values=(
+                        cliente["codigo"],
+                        cliente["nombre"],
+                        cliente["direccion"],
+                        cliente["plan"],
+                        f"Q{cliente['precio']:.2f}",
+                        cliente["estado"]
+                    )
+                )
+
+                messagebox.showinfo(
+                    "Cliente encontrado",
+                    f"Cliente: {cliente['nombre']}"
+                )
+                return
+
+        messagebox.showwarning(
+            "Sin resultados",
+            "No existe un cliente con ese codigo."
+        )
 
 if __name__ == "__main__":
     clientes = []
