@@ -83,6 +83,16 @@ class OrdenesGUI:
             self.tabla.column(columna, width=160)
 
         self.tabla.pack(fill="both", expand=True)
+        tk.Button(
+            ventana,
+            text="FINALIZAR ORDEN SELECCIONADA",
+            command=self.finalizar_orden,
+            bg="#198754",
+            fg="white",
+            font=("Arial", 11, "bold"),
+            padx=20,
+            pady=8
+        ).pack(pady=10)
 
         self.actualizar_tabla()
 
@@ -128,18 +138,52 @@ class OrdenesGUI:
             "Registro exitoso",
             "La orden fue registrada correctamente."
         )
-
     def actualizar_tabla(self):
         for elemento in self.tabla.get_children():
             self.tabla.delete(elemento)
 
-        for orden in ordenes:
+        for indice, orden in enumerate(ordenes):
             self.tabla.insert(
                 "",
                 tk.END,
+                iid=str(indice),
                 values=orden
             )
 
+
+    def finalizar_orden(self):
+        seleccion = self.tabla.selection()
+
+        if not seleccion:
+            messagebox.showwarning(
+                "Sin seleccion",
+                "Seleccione una orden de la tabla."
+            )
+            return
+
+        # Buscar la orden seleccionada mediante su identificador
+        indice = int(seleccion[0])
+
+        if ordenes[indice][3] == "Finalizada":
+            messagebox.showinfo(
+                "Orden finalizada",
+                "Esta orden ya fue finalizada."
+            )
+            return
+
+        confirmar = messagebox.askyesno(
+            "Confirmar finalizacion",
+            "Desea marcar esta orden como finalizada?"
+        )
+
+        if confirmar:
+            ordenes[indice][3] = "Finalizada"
+            self.actualizar_tabla()
+
+            messagebox.showinfo(
+                "Operacion exitosa",
+                "La orden fue finalizada correctamente."
+            )
 
 if __name__ == "__main__":
     clientes_prueba = [
