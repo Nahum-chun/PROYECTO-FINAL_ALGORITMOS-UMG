@@ -116,6 +116,18 @@ class ClientesGUI:
             fg="white"
         ).pack(side="left", padx=5)
 
+        tk.Button(
+            ventana,
+            text="ELIMINAR CLIENTE SELECCIONADO",
+            command=self.eliminar_cliente,
+            bg="#DC2626",
+            fg="white",
+            font=("Arial", 10, "bold"),
+            width=32
+        ).pack(pady=10)
+
+
+
         contenedor = tk.Frame(ventana)
         contenedor.pack(fill="both", expand=True, padx=25, pady=10)
 
@@ -273,7 +285,52 @@ class ClientesGUI:
         messagebox.showwarning(
             "Sin resultados",
             "No existe un cliente con ese codigo."
+        )   
+        
+    def eliminar_cliente(self):
+        seleccion = self.tabla.selection()
+
+        if not seleccion:
+            messagebox.showwarning(
+                "Seleccion requerida",
+                "Seleccione un cliente de la tabla."
+            )
+            return
+
+        valores = self.tabla.item(seleccion[0], "values")
+        codigo = str(valores[0])
+
+        cliente = next(
+            (
+                c for c in self.clientes
+                if str(c["codigo"]) == codigo
+            ),
+            None
         )
+
+        if cliente is None:
+            messagebox.showerror(
+                "Error",
+                "No se encontro el cliente."
+            )
+            return
+
+        confirmar = messagebox.askyesno(
+            "Confirmar eliminacion",
+            f"Desea eliminar al cliente {cliente['nombre']}?"
+        )
+
+        if not confirmar:
+            return
+
+        self.clientes.remove(cliente)
+        self.actualizar_tabla()
+
+        messagebox.showinfo(
+            "Cliente eliminado",
+            "El cliente fue eliminado correctamente."
+        )
+
 
 if __name__ == "__main__":
     clientes = []
