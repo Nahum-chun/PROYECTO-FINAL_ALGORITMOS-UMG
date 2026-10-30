@@ -25,6 +25,7 @@ clientes = []
 # CONTROL DE VENTANAS
 # ==========================================
 
+
 def abrir_modulo(panel, titulo, clase_modulo):
 
     # Si la ventana ya existe, traerla al frente
@@ -47,8 +48,28 @@ def abrir_modulo(panel, titulo, clase_modulo):
         ventana.destroy()
         raise
 
-    ventana.lift()
+    # Boton para volver al menu principal
+       # Boton flotante para regresar al menu principal
+    boton_volver = tk.Button(
+        ventana,
+        text="← VOLVER AL MENU",
+        command=ventana.destroy,
+        font=("Arial", 10, "bold"),
+        bg="#64748B",
+        fg="white",
+        cursor="hand2"
+    )
 
+    boton_volver.place(
+        relx=0.98,
+        rely=0.02,
+        anchor="ne"
+    )
+
+    boton_volver.lift()
+
+    ventana.lift()
+    ventana.focus_force()
 
 def abrir_clientes(panel):
     abrir_modulo(
