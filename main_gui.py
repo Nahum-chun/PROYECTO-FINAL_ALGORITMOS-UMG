@@ -86,7 +86,12 @@ def abrir_ordenes(panel):
         OrdenesGUI
     )
 
-
+def abrir_estadisticas(panel):
+    abrir_modulo(
+        panel,
+        "NETCONTROL ISP - Estadisticas",
+        EstadisticasGUI
+    )
 # ==========================================
 # PANEL PRINCIPAL
 # ==========================================
@@ -147,6 +152,19 @@ def abrir_panel():
         command=lambda: abrir_ordenes(panel),
         font=("Arial", 13, "bold"),
         bg="#0F766E",
+        fg="white",
+        width=28,
+        height=2,
+        cursor="hand2"
+    ).pack(pady=10)
+
+    # Boton de estadisticas
+    tk.Button(
+        panel,
+        text="ESTADISTICAS DEL SISTEMA",
+        command=lambda: abrir_estadisticas(panel),
+        font=("Arial", 13, "bold"),
+        bg="#7C3AED",
         fg="white",
         width=28,
         height=2,
